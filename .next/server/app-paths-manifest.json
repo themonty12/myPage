@@ -1,18 +1,6 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
   "/api/archive/route": "app/api/archive/route.js",
-  "/(site)/albums/new/page": "app/(site)/albums/new/page.js",
-  "/(site)/journal/new/page": "app/(site)/journal/new/page.js",
-  "/(site)/albums/page": "app/(site)/albums/page.js",
-  "/(site)/events/[id]/page": "app/(site)/events/[id]/page.js",
-  "/(site)/events/new/page": "app/(site)/events/new/page.js",
-  "/(site)/albums/[id]/page": "app/(site)/albums/[id]/page.js",
   "/(site)/events/page": "app/(site)/events/page.js",
-  "/(site)/search/page": "app/(site)/search/page.js",
-  "/(site)/journal/[id]/page": "app/(site)/journal/[id]/page.js",
-  "/(site)/journal/page": "app/(site)/journal/page.js",
-  "/(site)/page": "app/(site)/page.js",
-  "/(site)/settings/page": "app/(site)/settings/page.js",
-  "/share/[shareId]/page": "app/share/[shareId]/page.js",
-  "/share/[shareId]/opengraph-image/route": "app/share/[shareId]/opengraph-image/route.js"
+  "/(site)/events/[id]/page": "app/(site)/events/[id]/page.js",
+  "/share/[shareId]/page": "app/share/[shareId]/page.js"
 }

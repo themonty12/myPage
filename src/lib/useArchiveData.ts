@@ -15,8 +15,15 @@ export const useArchiveData = () => {
         const response = await fetch('/api/archive', { cache: 'no-store' })
         if (!response.ok) throw new Error('failed')
         const remote = (await response.json()) as ArchiveData
-        setData(remote)
-        saveData(remote)
+        const local = loadData()
+        const remoteStamp = Date.parse(remote.updatedAt ?? '') || 0
+        const localStamp = Date.parse(local.updatedAt ?? '') || 0
+        if (remoteStamp >= localStamp) {
+          setData(remote)
+          saveData(remote)
+        } else {
+          setData(local)
+        }
       } catch {
         // Keep local data when remote is unavailable.
       } finally {
