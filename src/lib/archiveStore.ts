@@ -46,7 +46,17 @@ const readArchiveFromSupabase = async (): Promise<ArchiveData> => {
     .eq('id', defaultArchiveId)
     .single()
 
-  if (error || !data?.data) {
+  if (error) {
+    console.error('[archive] Supabase read error', {
+      message: error.message,
+      status: error.status,
+      statusCode: (error as { statusCode?: number }).statusCode,
+    })
+    return defaultData
+  }
+
+  if (!data?.data) {
+    console.warn('[archive] Supabase read empty data for id=default')
     return defaultData
   }
 
@@ -65,6 +75,11 @@ const writeArchiveToSupabase = async (data: ArchiveData) => {
 
   const { error } = await client.from('archives').upsert(payload)
   if (error) {
+    console.error('[archive] Supabase write error', {
+      message: error.message,
+      status: error.status,
+      statusCode: (error as { statusCode?: number }).statusCode,
+    })
     throw new Error('Supabase 저장에 실패했습니다.')
   }
 }

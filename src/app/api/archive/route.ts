@@ -26,6 +26,7 @@ export async function GET() {
       },
     })
   } catch (error) {
+    console.error('[archive] GET failed', error)
     return NextResponse.json(
       { message: '파일 데이터를 불러오지 못했어요.' },
       { status: 500, headers: CACHE_HEADERS }
@@ -41,6 +42,7 @@ export async function POST(request: Request) {
     await writeArchive(sanitized)
     return NextResponse.json(sanitized, { headers: CACHE_HEADERS })
   } catch (error) {
+    console.error('[archive] POST failed', error)
     return NextResponse.json(
       { message: '파일 데이터를 저장하지 못했어요.' },
       { status: 500, headers: CACHE_HEADERS }
