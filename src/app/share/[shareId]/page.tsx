@@ -3,6 +3,9 @@ import type { Metadata } from 'next'
 import ShareClient from '@/components/share/ShareClient'
 import { readArchive } from '@/lib/archiveStore'
 
+export const dynamic = 'force-dynamic'
+export const fetchCache = 'default-no-store'
+
 type Props = {
   params: {
     shareId: string
