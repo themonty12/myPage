@@ -130,6 +130,9 @@ export const initData = () => {
 const sanitizeStrings = (value: unknown, fallback?: string) =>
   typeof value === 'string' ? value : fallback
 
+const sanitizeRequiredString = (value: unknown, fallback = '') =>
+  sanitizeStrings(value, fallback) ?? fallback
+
 const sanitizeStringArray = (value: unknown) =>
   Array.isArray(value) ? value.filter((item) => typeof item === 'string') : []
 
@@ -137,24 +140,24 @@ const sanitizeBoolean = (value: unknown, fallback = false) =>
   typeof value === 'boolean' ? value : fallback
 
 const sanitizeJournal = (item: Partial<Journal>): Journal => ({
-  id: sanitizeStrings(item.id),
-  title: sanitizeStrings(item.title),
-  date: sanitizeStrings(item.date),
+  id: sanitizeRequiredString(item.id, createId('journal')),
+  title: sanitizeRequiredString(item.title, ''),
+  date: sanitizeRequiredString(item.date, ''),
   category: (item.category as Journal['category']) ?? '기타',
   tags: sanitizeStringArray(item.tags),
   location: sanitizeStrings(item.location, undefined),
   summary: sanitizeStrings(item.summary, undefined),
-  content: sanitizeStrings(item.content),
+  content: sanitizeRequiredString(item.content, ''),
   photos: sanitizeStringArray(item.photos),
   isPublic: sanitizeBoolean(item.isPublic),
   shareId: sanitizeStrings(item.shareId, undefined),
-  createdAt: sanitizeStrings(item.createdAt, now()),
-  updatedAt: sanitizeStrings(item.updatedAt, now()),
+  createdAt: sanitizeRequiredString(item.createdAt, now()),
+  updatedAt: sanitizeRequiredString(item.updatedAt, now()),
 })
 
 const sanitizeAlbum = (item: Partial<Album>): Album => ({
-  id: sanitizeStrings(item.id),
-  title: sanitizeStrings(item.title),
+  id: sanitizeRequiredString(item.id, createId('album')),
+  title: sanitizeRequiredString(item.title, ''),
   periodStart: sanitizeStrings(item.periodStart, undefined),
   periodEnd: sanitizeStrings(item.periodEnd, undefined),
   tags: sanitizeStringArray(item.tags),
@@ -163,15 +166,15 @@ const sanitizeAlbum = (item: Partial<Album>): Album => ({
   memo: sanitizeStrings(item.memo, undefined),
   isPublic: sanitizeBoolean(item.isPublic),
   shareId: sanitizeStrings(item.shareId, undefined),
-  createdAt: sanitizeStrings(item.createdAt, now()),
-  updatedAt: sanitizeStrings(item.updatedAt, now()),
+  createdAt: sanitizeRequiredString(item.createdAt, now()),
+  updatedAt: sanitizeRequiredString(item.updatedAt, now()),
 })
 
 const sanitizeEvent = (item: Partial<Event>): Event => ({
-  id: sanitizeStrings(item.id),
-  title: sanitizeStrings(item.title),
+  id: sanitizeRequiredString(item.id, createId('event')),
+  title: sanitizeRequiredString(item.title, ''),
   type: (item.type as Event['type']) ?? '기타',
-  date: sanitizeStrings(item.date),
+  date: sanitizeRequiredString(item.date, ''),
   time: sanitizeStrings(item.time, undefined),
   location: sanitizeStrings(item.location, undefined),
   contact: sanitizeStrings(item.contact, undefined),
@@ -179,7 +182,7 @@ const sanitizeEvent = (item: Partial<Event>): Event => ({
   venueInfo: sanitizeStrings(item.venueInfo, undefined),
   transitInfo: sanitizeStrings(item.transitInfo, undefined),
   accountInfo: sanitizeStrings(item.accountInfo, undefined),
-  description: sanitizeStrings(item.description),
+  description: sanitizeRequiredString(item.description, ''),
   coverUrl: sanitizeStrings(item.coverUrl, undefined),
   photos: sanitizeStringArray(item.photos),
   guestbook: Array.isArray(item.guestbook)
@@ -189,13 +192,13 @@ const sanitizeEvent = (item: Partial<Event>): Event => ({
           id: sanitizeStrings((entry as { id?: string }).id) ?? createId('guestbook'),
           name: sanitizeStrings((entry as { name?: string }).name) ?? '익명',
           message: sanitizeStrings((entry as { message?: string }).message) ?? '',
-          createdAt: sanitizeStrings((entry as { createdAt?: string }).createdAt, now()),
+          createdAt: sanitizeRequiredString((entry as { createdAt?: string }).createdAt, now()),
         }))
     : [],
   isPublic: sanitizeBoolean(item.isPublic),
   shareId: sanitizeStrings(item.shareId, undefined),
-  createdAt: sanitizeStrings(item.createdAt, now()),
-  updatedAt: sanitizeStrings(item.updatedAt, now()),
+  createdAt: sanitizeRequiredString(item.createdAt, now()),
+  updatedAt: sanitizeRequiredString(item.updatedAt, now()),
 })
 
 const sanitizeSettings = (value: Partial<Settings> | undefined): Settings => ({

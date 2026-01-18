@@ -15,6 +15,7 @@ type SearchResult = {
   date?: string
   href: string
   tags: string[]
+  content: string
 }
 
 const getTags = (journals: Journal[], albums: Album[], events: Event[]) =>
