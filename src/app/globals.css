@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply bg-sand-50 text-sand-900 antialiased;
+}
+
+.card {
+  @apply rounded-2xl border border-sand-100 bg-white/70 shadow-sm;
+}
+
+.label {
+  @apply text-xs font-semibold uppercase tracking-wide text-sand-500;
+}
+
+.input {
+  @apply w-full rounded-xl border border-sand-200 bg-white px-4 py-2 text-sm text-sand-800 placeholder:text-sand-400 focus:outline-none focus:ring-2 focus:ring-sand-300;
+}
+
+.textarea {
+  @apply w-full rounded-xl border border-sand-200 bg-white px-4 py-2 text-sm text-sand-800 placeholder:text-sand-400 focus:outline-none focus:ring-2 focus:ring-sand-300;
+}
+
+.button {
+  @apply inline-flex items-center justify-center rounded-xl bg-sand-800 px-4 py-2 text-sm font-medium text-white transition hover:bg-sand-700;
+}
+
+.button-outline {
+  @apply inline-flex items-center justify-center rounded-xl border border-sand-200 bg-white px-4 py-2 text-sm font-medium text-sand-700 transition hover:text-sand-900;
+}
+
+.badge {
+  @apply inline-flex items-center rounded-full bg-sand-100 px-3 py-1 text-xs text-sand-700;
+}
+
+.photo-tile {
+  @apply rounded-xl bg-white p-2 shadow-sm transition;
+}
+
+.photo-tile.dragging {
+  @apply opacity-60 ring-2 ring-sand-300;
+}
+
+.photo-tile.drop-target {
+  @apply ring-2 ring-sand-400;
+}
+
+.invite-page {
+  @apply min-h-screen bg-sand-50 py-8;
+  background: linear-gradient(180deg, #fff9f4 0%, #f9f2e8 100%);
+  color: #4e3727;
+  font-family: 'Iropke Batang', 'Noto Serif KR', 'Nanum Myeongjo', 'Garamond',
+    'Times New Roman', serif;
+}
+
+.invite-shell {
+  @apply mx-auto w-full max-w-[420px] rounded-[32px] border border-sand-100 bg-white px-5 py-6 shadow-lg;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.invite-section {
+  @apply rounded-2xl border border-sand-100 bg-white/80 p-5 shadow-sm;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.invite-title {
+  @apply text-center text-2xl font-semibold;
+  letter-spacing: 0.02em;
+}
+
+.invite-subtitle {
+  @apply text-center text-sm text-sand-600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.invite-divider {
+  @apply my-6 h-px w-full bg-sand-100;
+}
+
+.invite-button {
+  @apply inline-flex items-center gap-1 rounded-full border border-sand-200 bg-white px-4 py-2 text-xs text-sand-700 shadow-sm transition hover:border-sand-300 hover:text-sand-900;
+}
+
+.invite-icon {
+  @apply inline-flex h-6 w-6 items-center justify-center rounded-full bg-sand-100 text-sand-600;
+}

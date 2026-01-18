@@ -1,0 +1,49 @@
+{
+  "journals": [
+    {
+      "id": "journal-356df5f7-c004-423a-9401-0586ee240caf",
+      "title": "스포티지",
+      "date": "2026-01-18",
+      "category": "기타",
+      "tags": [
+        "자동차",
+        "새차"
+      ],
+      "location": "구리 교문 대리점",
+      "summary": "새 차(스포티지)를 구매하기 위한 견적서를 받기 위해 희진이와 함께 교문 대리점을 방문했다. 아버님의 지인의...",
+      "content": "새 차(스포티지)를 구매하기 위한 견적서를 받기 위해 희진이와 함께 교문 대리점을 방문했다. 아버님의 지인의 지인의 소개를 받아 갔는데, 직원분도 성당분이었다니 신기하다. 새 차 구매에 대한 이야기를 하는데 시간이 1시간이 넘게 거렸다니... 듣는 얘기가 재미있어서 잘 몰랐다. 새 차를 구매하고 타는 상상을 하니 기분이 좋았지만, 들어가는 금액을 생각하니 후덜덜하다.ㅎㅎ\n4개월 동안 희진이가 잘 버텨주기를... 바라고 잘 나오길 바란다 새차!!",
+      "photos": [],
+      "isPublic": false,
+      "createdAt": "2026-01-18T12:01:55.823Z",
+      "updatedAt": "2026-01-18T12:01:55.823Z"
+    }
+  ],
+  "albums": [],
+  "events": [
+    {
+      "id": "event-86c00831-4f75-4bcd-ba60-1ac5f3b0bdf3",
+      "title": "청첩장",
+      "type": "청첩장",
+      "date": "2026-01-15",
+      "time": "22:30",
+      "location": "서울",
+      "contact": "01022224444",
+      "greeting": "장남",
+      "venueInfo": "아하아하",
+      "transitInfo": "에헤에헤",
+      "accountInfo": "이이이이이이",
+      "description": "청첩",
+      "photos": [],
+      "guestbook": [],
+      "isPublic": true,
+      "shareId": "share-b3b39933-87ba-4620-a778-254a7c84b0fb",
+      "createdAt": "2026-01-15T13:30:52.040Z",
+      "updatedAt": "2026-01-15T13:30:52.040Z"
+    }
+  ],
+  "settings": {
+    "defaultVisibility": "private",
+    "theme": "cream"
+  },
+  "updatedAt": "2026-01-18T12:01:55.853Z"
+}

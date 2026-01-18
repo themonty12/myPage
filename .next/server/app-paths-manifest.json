@@ -1,0 +1,6 @@
+{
+  "/(site)/page": "app/(site)/page.js",
+  "/(site)/events/new/page": "app/(site)/events/new/page.js",
+  "/(site)/journal/new/page": "app/(site)/journal/new/page.js",
+  "/(site)/journal/[id]/page": "app/(site)/journal/[id]/page.js"
+}
