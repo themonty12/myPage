@@ -1,5 +1,7 @@
 {
+  "/api/archive/route": "app/api/archive/route.js",
   "/(site)/events/[id]/page": "app/(site)/events/[id]/page.js",
+  "/(site)/page": "app/(site)/page.js",
   "/share/[shareId]/page": "app/share/[shareId]/page.js",
-  "/(site)/page": "app/(site)/page.js"
+  "/(site)/events/page": "app/(site)/events/page.js"
 }
