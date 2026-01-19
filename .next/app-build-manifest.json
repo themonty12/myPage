@@ -1,9 +1,9 @@
 {
   "pages": {
-    "/(site)/events/[id]/page": [
+    "/(site)/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(site)/events/[id]/page.js"
+      "static/chunks/app/(site)/page.js"
     ],
     "/(site)/layout": [
       "static/chunks/webpack.js",
@@ -15,26 +15,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/layout.js"
-    ],
-    "/share/[shareId]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/share/[shareId]/page.js"
-    ],
-    "/share/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/share/layout.js"
-    ],
-    "/(site)/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(site)/page.js"
-    ],
-    "/(site)/events/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(site)/events/page.js"
     ],
     "/_not-found/page": [
       "static/chunks/webpack.js",

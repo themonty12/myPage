@@ -80,7 +80,10 @@ const writeArchiveToSupabase = async (data: ArchiveData) => {
       status: error.status,
       statusCode: (error as { statusCode?: number }).statusCode,
     })
-    throw new Error('Supabase 저장에 실패했습니다.')
+    const status = error.status ?? (error as { statusCode?: number }).statusCode
+    throw new Error(
+      `SUPABASE_UPSERT_FAILED: ${error.message}${status ? ` (status ${status})` : ''}`
+    )
   }
 }
 

@@ -17,6 +17,7 @@ const getStorageDebugInfo = () => ({
 export async function GET() {
   try {
     console.info('[archive] GET', getStorageDebugInfo())
+    console.log('process.env.SUPABASE_URL', process.env.SUPABASE_URL)
     const data = await readArchive()
     return NextResponse.json(data, {
       headers: {
@@ -43,8 +44,9 @@ export async function POST(request: Request) {
     return NextResponse.json(sanitized, { headers: CACHE_HEADERS })
   } catch (error) {
     console.error('[archive] POST failed', error)
+    const detail = error instanceof Error ? error.message : 'unknown error'
     return NextResponse.json(
-      { message: '파일 데이터를 저장하지 못했어요.' },
+      { message: '파일 데이터를 저장하지 못했어요.', detail },
       { status: 500, headers: CACHE_HEADERS }
     )
   }
