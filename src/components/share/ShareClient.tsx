@@ -15,13 +15,26 @@ export default function ShareClient({ shareId }: Props) {
   const [guestbookName, setGuestbookName] = useState('')
   const [guestbookMessage, setGuestbookMessage] = useState('')
 
-  if (!ready) {
-    return <div className="text-sm text-sand-600">데이터를 불러오는 중...</div>
-  }
-
   const journal = data.journals.find((item) => item.shareId === shareId)
   const album = data.albums.find((item) => item.shareId === shareId)
   const event = data.events.find((item) => item.shareId === shareId)
+
+  const mapLink = event?.location
+    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}`
+    : null
+  const mapEmbedLink = event?.location
+    ? `https://www.google.com/maps?q=${encodeURIComponent(event.location)}&output=embed`
+    : null
+  const kakaoMapLink = event?.location
+    ? `https://map.kakao.com/link/search/${encodeURIComponent(event.location)}`
+    : null
+  const naverMapLink = event?.location
+    ? `https://map.naver.com/v5/search/${encodeURIComponent(event.location)}`
+    : null
+
+  if (!ready) {
+    return <div className="text-sm text-sand-600">데이터를 불러오는 중...</div>
+  }
 
   if (!journal && !album && !event) {
     return (
@@ -77,15 +90,6 @@ export default function ShareClient({ shareId }: Props) {
     )
   }
 
-  const mapLink = event?.location
-    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}`
-    : null
-  const kakaoMapLink = event?.location
-    ? `https://map.kakao.com/link/search/${encodeURIComponent(event.location)}`
-    : null
-  const naverMapLink = event?.location
-    ? `https://map.naver.com/v5/search/${encodeURIComponent(event.location)}`
-    : null
 
   const handleAddGuestbook = () => {
     if (!event) return
@@ -187,6 +191,17 @@ export default function ShareClient({ shareId }: Props) {
         {event?.location ? (
           <section className="invite-section space-y-3">
             <SectionTitle>지도</SectionTitle>
+            {mapEmbedLink ? (
+              <div className="overflow-hidden rounded-2xl border border-sand-100">
+                <iframe
+                  title="지도"
+                  src={mapEmbedLink}
+                  className="h-64 w-full"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            ) : null}
             <div className="flex flex-wrap gap-2">
               {mapLink ? (
                 <a className="invite-button" href={mapLink} target="_blank" rel="noreferrer">

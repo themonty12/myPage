@@ -1,5 +1,10 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
   "/api/archive/route": "app/api/archive/route.js",
+  "/(site)/journal/page": "app/(site)/journal/page.js",
+  "/(site)/journal/[id]/page": "app/(site)/journal/[id]/page.js",
+  "/(site)/journal/new/page": "app/(site)/journal/new/page.js",
+  "/(site)/albums/page": "app/(site)/albums/page.js",
+  "/(site)/search/page": "app/(site)/search/page.js",
+  "/(site)/settings/page": "app/(site)/settings/page.js",
   "/(site)/page": "app/(site)/page.js"
 }
