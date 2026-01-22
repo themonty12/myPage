@@ -9,7 +9,7 @@ import { moveItem, readFilesAsDataUrls } from '@/lib/files'
 import { createId } from '@/lib/storage'
 import { useArchiveData } from '@/lib/useArchiveData'
 
-const categories: JournalCategory[] = ['데이트', '연애', '육아', '가족', '여행', '기타']
+const categories: JournalCategory[] = ['데이트', '연애', '육아', '가족', '여행', '운동', '기타']
 
 export default function JournalFormClient() {
   const router = useRouter()

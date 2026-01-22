@@ -1,4 +1,4 @@
-export type JournalCategory = '데이트' | '연애' | '육아' | '가족' | '여행' | '기타'
+export type JournalCategory = '데이트' | '연애' | '육아' | '가족' | '여행' | '운동' | '기타'
 
 export type Journal = {
   id: string

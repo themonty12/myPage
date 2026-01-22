@@ -27,7 +27,7 @@ export default function JournalDetailClient({ id }: Props) {
   const [photos, setPhotos] = useState<string[]>([])
   const [dragIndex, setDragIndex] = useState<number | null>(null)
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null)
-  const categories: JournalCategory[] = ['데이트', '연애', '육아', '가족', '여행', '기타']
+  const categories: JournalCategory[] = ['데이트', '연애', '육아', '가족', '여행', '운동', '기타']
 
   const handlePhotoChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const uploaded = await readFilesAsDataUrls(event.target.files, 6, {

@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react'
 import { formatDate } from '@/lib/storage'
 import { useArchiveData } from '@/lib/useArchiveData'
 
-const categories = ['전체', '데이트', '연애', '육아', '가족', '여행', '기타', '운동'] as const
+const categories = ['전체', '데이트', '연애', '육아', '가족', '여행', '운동', '기타'] as const
 
 export default function JournalListClient() {
   const { data, ready, update } = useArchiveData()
