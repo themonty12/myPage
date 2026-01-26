@@ -33,7 +33,7 @@ export default function FoodFormClient() {
 
     setIsUploading(true)
     try {
-      const uploaded = await readFilesAsDataUrls([files[0]], 1, {
+      const uploaded = await readFilesAsDataUrls(files, 1, {
         maxWidth: 800,
         maxHeight: 600,
         quality: 0.8,
