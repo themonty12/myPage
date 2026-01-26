@@ -16,26 +16,6 @@
       "static/chunks/main-app.js",
       "static/chunks/app/layout.js"
     ],
-    "/(site)/events/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(site)/events/page.js"
-    ],
-    "/(site)/events/[id]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(site)/events/[id]/page.js"
-    ],
-    "/share/[shareId]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/share/[shareId]/page.js"
-    ],
-    "/share/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/share/layout.js"
-    ],
     "/(site)/journal/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -45,26 +25,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/(site)/journal/[id]/page.js"
-    ],
-    "/(site)/journal/new/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(site)/journal/new/page.js"
-    ],
-    "/(site)/albums/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(site)/albums/page.js"
-    ],
-    "/(site)/search/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(site)/search/page.js"
-    ],
-    "/(site)/settings/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(site)/settings/page.js"
     ]
   }
 }
