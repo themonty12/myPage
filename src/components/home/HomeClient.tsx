@@ -13,6 +13,7 @@ const quickActions = [
   { label: '기록하기', href: '/journal/new', description: '오늘의 순간 남기기' },
   { label: '사진 올리기', href: '/albums/new', description: '새 앨범 시작하기' },
   { label: '이벤트 만들기', href: '/events/new', description: '특별한 날 기록' },
+  { label: '메뉴 추가', href: '/food/new', description: '새로운 레시피 등록' },
 ]
 
 export default function HomeClient() {
@@ -57,7 +58,7 @@ export default function HomeClient() {
         </div>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-3">
+      <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {quickActions.map((action) => (
           <a
             key={action.href}

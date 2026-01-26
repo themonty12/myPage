@@ -20,7 +20,7 @@ export default function SiteLayout({
         </div>
         <nav className="flex flex-wrap gap-4 text-sm text-sand-700">
           <a className="hover:text-sand-900" href="/">
-            집
+            Home
           </a>
           <a className="hover:text-sand-900" href="/journal">
             일기장
@@ -30,6 +30,9 @@ export default function SiteLayout({
           </a>
           <a className="hover:text-sand-900" href="/events">
             특별한 날들
+          </a>
+          <a className="hover:text-sand-900" href="/food">
+            음식 메뉴
           </a>
           <a className="hover:text-sand-900" href="/search">
             찾기

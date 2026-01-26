@@ -1,6 +1,0 @@
-{
-  "/api/archive/route": "app/api/archive/route.js",
-  "/(site)/page": "app/(site)/page.js",
-  "/(site)/journal/page": "app/(site)/journal/page.js",
-  "/(site)/journal/[id]/page": "app/(site)/journal/[id]/page.js"
-}
