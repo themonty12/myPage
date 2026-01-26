@@ -49,8 +49,8 @@ const readArchiveFromSupabase = async (): Promise<ArchiveData> => {
   if (error) {
     console.error('[archive] Supabase read error', {
       message: error.message,
-      status: error.status,
-      statusCode: (error as { statusCode?: number }).statusCode,
+      code: error.code,
+      details: error.details,
     })
     return defaultData
   }
@@ -77,12 +77,11 @@ const writeArchiveToSupabase = async (data: ArchiveData) => {
   if (error) {
     console.error('[archive] Supabase write error', {
       message: error.message,
-      status: error.status,
-      statusCode: (error as { statusCode?: number }).statusCode,
+      code: error.code,
+      details: error.details,
     })
-    const status = error.status ?? (error as { statusCode?: number }).statusCode
     throw new Error(
-      `SUPABASE_UPSERT_FAILED: ${error.message}${status ? ` (status ${status})` : ''}`
+      `SUPABASE_UPSERT_FAILED: ${error.message}${error.code ? ` (code: ${error.code})` : ''}`
     )
   }
 }
