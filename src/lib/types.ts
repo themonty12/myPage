@@ -62,7 +62,7 @@ export type Event = {
   updatedAt: string
 }
 
-export type FoodCategory = '한식' | '양식' | '중식' | '일식' | '아시안' | '치킨' | '피자' | '패스트푸드' | '간편식' | '기타'
+export type FoodCategory = '한식' | '양식' | '중식' | '일식' | '아시안' | '브런치' | '패스트푸드' | '간편식' | '기타'
 
 export type FoodMenu = {
   id: string

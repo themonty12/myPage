@@ -9,7 +9,7 @@ import { readFilesAsDataUrls } from '@/lib/files'
 import { createId } from '@/lib/storage'
 import { useArchiveData } from '@/lib/useArchiveData'
 
-const categories: FoodCategory[] = ['한식', '양식', '중식', '일식', '아시안', '치킨', '피자', '패스트푸드', '간편식', '기타']
+const categories: FoodCategory[] = ['한식', '양식', '중식', '일식', '아시안', '브런치', '패스트푸드', '간편식', '기타']
 
 export default function FoodFormClient() {
   const router = useRouter()
