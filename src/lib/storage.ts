@@ -233,7 +233,7 @@ const sanitizeStringArray = (value: unknown) =>
 const sanitizeBoolean = (value: unknown, fallback = false) =>
   typeof value === 'boolean' ? value : fallback
 
-const sanitizeJournal = (item: Partial<Journal>): Journal => ({
+export const sanitizeJournalRow = (item: Partial<Journal>): Journal => ({
   id: sanitizeRequiredString(item.id, createId('journal')),
   title: sanitizeRequiredString(item.title, ''),
   date: sanitizeRequiredString(item.date, ''),
@@ -295,7 +295,7 @@ const sanitizeEvent = (item: Partial<Event>): Event => ({
   updatedAt: sanitizeRequiredString(item.updatedAt, now()),
 })
 
-const sanitizeFoodMenu = (item: Partial<FoodMenu>): FoodMenu => ({
+export const sanitizeFoodMenuRow = (item: Partial<FoodMenu>): FoodMenu => ({
   id: sanitizeRequiredString(item.id, createId('food')),
   name: sanitizeRequiredString(item.name, ''),
   category: (item.category as FoodMenu['category']) ?? '기타',
@@ -334,10 +334,10 @@ export const exportData = (data: ArchiveData) => {
 export const importData = (raw: string): ArchiveData => {
   const parsed = JSON.parse(raw) as Partial<ArchiveData>
   return {
-    journals: (parsed.journals ?? []).map((item) => sanitizeJournal(item as Partial<Journal>)),
+    journals: (parsed.journals ?? []).map((item) => sanitizeJournalRow(item as Partial<Journal>)),
     albums: (parsed.albums ?? []).map((item) => sanitizeAlbum(item as Partial<Album>)),
     events: (parsed.events ?? []).map((item) => sanitizeEvent(item as Partial<Event>)),
-    foodMenus: (parsed.foodMenus ?? []).map((item) => sanitizeFoodMenu(item as Partial<FoodMenu>)),
+    foodMenus: (parsed.foodMenus ?? []).map((item) => sanitizeFoodMenuRow(item as Partial<FoodMenu>)),
     settings: sanitizeSettings(parsed.settings),
     updatedAt: now(),
   }

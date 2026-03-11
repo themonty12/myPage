@@ -41,13 +41,13 @@ export default function FoodClient() {
           className={`
             aspect-square border border-sand-200 bg-white p-2 text-xs
             flex items-center justify-center text-center
-            ${isEmpty ? 'bg-sand-50 text-sand-400' : 'hover:bg-sand-50 cursor-pointer'}
+            ${isEmpty ? 'bg-sand-50 text-sand-400' : 'hover:bg-sand-100 cursor-pointer'}
             ${i % 9 === 2 || i % 9 === 5 ? 'border-r-2 border-r-sand-400' : ''}
             ${Math.floor(i / 9) === 2 || Math.floor(i / 9) === 5 ? 'border-b-2 border-b-sand-400' : ''}
           `}
           onClick={() => !isEmpty && setSelectedMenu(menu)}
         >
-          {isEmpty ? '빈 메뉴' : menu.name}
+          {isEmpty ? '' : menu.name}
         </div>
       )
     }
@@ -117,12 +117,20 @@ export default function FoodClient() {
         <section className="card p-6">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-medium">선택된 메뉴</h3>
-            <button
-              className="button-outline text-sm"
-              onClick={() => setSelectedMenu(null)}
-            >
-              선택 해제
-            </button>
+            <div className="flex gap-2">
+              <a
+                className="button-outline text-sm"
+                href={`/food/${selectedMenu.id}`}
+              >
+                상세 보기 / 수정
+              </a>
+              <button
+                className="button-outline text-sm"
+                onClick={() => setSelectedMenu(null)}
+              >
+                선택 해제
+              </button>
+            </div>
           </div>
           <div className="bg-sand-50 rounded-lg p-4 space-y-4">
             <div className="flex gap-4">

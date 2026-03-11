@@ -4,7 +4,8 @@ import { useState } from 'react'
 import type { ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 
-import { moveItem, readFilesAsDataUrls } from '@/lib/files'
+import { moveItem } from '@/lib/files'
+import { uploadImagesToBlob } from '@/lib/blob'
 import { formatDate } from '@/lib/storage'
 import { useArchiveData } from '@/lib/useArchiveData'
 
@@ -27,6 +28,7 @@ export default function AlbumDetailClient({ id }: Props) {
   const [photos, setPhotos] = useState<string[]>([])
   const [dragIndex, setDragIndex] = useState<number | null>(null)
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null)
+  const [isUploading, setIsUploading] = useState(false)
 
   if (!ready) {
     return <div className="text-sm text-sand-600">데이터를 불러오는 중...</div>
@@ -41,25 +43,35 @@ export default function AlbumDetailClient({ id }: Props) {
   }
 
   const handlePhotoChange = async (event: ChangeEvent<HTMLInputElement>) => {
-    const uploaded = await readFilesAsDataUrls(event.target.files, 12, {
-      maxWidth: 1600,
-      maxHeight: 1600,
-      quality: 0.82,
-      mimeType: 'image/webp',
-    })
-    setPhotos((prev) => [...prev, ...uploaded])
-    event.target.value = ''
+    setIsUploading(true)
+    try {
+      const uploaded = await uploadImagesToBlob(event.target.files, 12, {
+        maxWidth: 1600,
+        maxHeight: 1600,
+        quality: 0.82,
+        mimeType: 'image/webp',
+      })
+      setPhotos((prev) => [...prev, ...uploaded])
+    } finally {
+      setIsUploading(false)
+      event.target.value = ''
+    }
   }
 
   const handleCoverChange = async (event: ChangeEvent<HTMLInputElement>) => {
-    const uploaded = await readFilesAsDataUrls(event.target.files, 1, {
-      maxWidth: 2000,
-      maxHeight: 2000,
-      quality: 0.85,
-      mimeType: 'image/webp',
-    })
-    setCoverFile(uploaded[0])
-    event.target.value = ''
+    setIsUploading(true)
+    try {
+      const uploaded = await uploadImagesToBlob(event.target.files, 1, {
+        maxWidth: 2000,
+        maxHeight: 2000,
+        quality: 0.85,
+        mimeType: 'image/webp',
+      })
+      setCoverFile(uploaded[0])
+    } finally {
+      setIsUploading(false)
+      event.target.value = ''
+    }
   }
 
   const handleRemovePhoto = (index: number) => {
@@ -236,14 +248,17 @@ export default function AlbumDetailClient({ id }: Props) {
           <div>
             <p className="label">대표 사진 업로드</p>
             <div className="mt-2 flex items-center gap-3 rounded-2xl border border-dashed border-sand-200 bg-sand-50 px-4 py-6">
-              <span className="text-sm text-sand-500">한 장의 커버 사진을 선택하세요.</span>
-              <label className="button-outline ml-auto cursor-pointer">
-                파일 선택
+              <span className="text-sm text-sand-500">
+                {isUploading ? '업로드 중...' : '한 장의 커버 사진을 선택하세요.'}
+              </span>
+              <label className={`button-outline ml-auto ${isUploading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}>
+                {isUploading ? '업로드 중...' : '파일 선택'}
                 <input
                   type="file"
                   accept="image/*"
                   className="hidden"
                   onChange={handleCoverChange}
+                  disabled={isUploading}
                 />
               </label>
             </div>
@@ -258,15 +273,18 @@ export default function AlbumDetailClient({ id }: Props) {
           <div>
             <p className="label">사진 업로드</p>
             <div className="mt-2 flex items-center gap-3 rounded-2xl border border-dashed border-sand-200 bg-sand-50 px-4 py-6">
-              <span className="text-sm text-sand-500">여러 장을 추가할 수 있어요.</span>
-              <label className="button-outline ml-auto cursor-pointer">
-                파일 선택
+              <span className="text-sm text-sand-500">
+                {isUploading ? '업로드 중...' : '여러 장을 추가할 수 있어요.'}
+              </span>
+              <label className={`button-outline ml-auto ${isUploading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}>
+                {isUploading ? '업로드 중...' : '파일 선택'}
                 <input
                   type="file"
                   accept="image/*"
                   multiple
                   className="hidden"
                   onChange={handlePhotoChange}
+                  disabled={isUploading}
                 />
               </label>
             </div>

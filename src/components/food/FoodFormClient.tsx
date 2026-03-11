@@ -5,7 +5,7 @@ import type { ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 
 import type { FoodCategory } from '@/lib/types'
-import { readFilesAsDataUrls } from '@/lib/files'
+import { uploadImagesToBlob } from '@/lib/blob'
 import { createId } from '@/lib/storage'
 import { useArchiveData } from '@/lib/useArchiveData'
 
@@ -33,7 +33,7 @@ export default function FoodFormClient() {
 
     setIsUploading(true)
     try {
-      const uploaded = await readFilesAsDataUrls(files, 1, {
+      const uploaded = await uploadImagesToBlob(files, 1, {
         maxWidth: 800,
         maxHeight: 600,
         quality: 0.8,

@@ -5,7 +5,8 @@ import type { ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 
 import type { JournalCategory } from '@/lib/types'
-import { moveItem, readFilesAsDataUrls } from '@/lib/files'
+import { moveItem } from '@/lib/files'
+import { uploadImagesToBlob } from '@/lib/blob'
 import { createId } from '@/lib/storage'
 import { useArchiveData } from '@/lib/useArchiveData'
 
@@ -31,16 +32,22 @@ export default function JournalFormClient() {
   const [lastRemoved, setLastRemoved] = useState<{ index: number; photo: string } | null>(
     null
   )
+  const [isUploading, setIsUploading] = useState(false)
 
   const handlePhotoChange = async (event: ChangeEvent<HTMLInputElement>) => {
-    const uploaded = await readFilesAsDataUrls(event.target.files, 6, {
-      maxWidth: 1600,
-      maxHeight: 1600,
-      quality: 0.82,
-      mimeType: 'image/webp',
-    })
-    setPhotos((prev) => [...prev, ...uploaded])
-    event.target.value = ''
+    setIsUploading(true)
+    try {
+      const uploaded = await uploadImagesToBlob(event.target.files, 6, {
+        maxWidth: 1600,
+        maxHeight: 1600,
+        quality: 0.82,
+        mimeType: 'image/webp',
+      })
+      setPhotos((prev) => [...prev, ...uploaded])
+    } finally {
+      setIsUploading(false)
+      event.target.value = ''
+    }
   }
 
   const handleRemovePhoto = (index: number) => {
@@ -190,15 +197,18 @@ export default function JournalFormClient() {
         <div>
           <p className="label">사진 추가</p>
           <div className="mt-2 flex items-center gap-3 rounded-2xl border border-dashed border-sand-200 bg-sand-50 px-4 py-6">
-            <span className="text-sm text-sand-500">최대 6장까지 추가할 수 있어요.</span>
-            <label className="button-outline ml-auto cursor-pointer">
-              파일 선택
+            <span className="text-sm text-sand-500">
+              {isUploading ? '업로드 중...' : '최대 6장까지 추가할 수 있어요.'}
+            </span>
+            <label className={`button-outline ml-auto ${isUploading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}>
+              {isUploading ? '업로드 중...' : '파일 선택'}
               <input
                 type="file"
                 accept="image/*"
                 multiple
                 className="hidden"
                 onChange={handlePhotoChange}
+                disabled={isUploading}
               />
             </label>
           </div>

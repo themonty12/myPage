@@ -5,7 +5,8 @@ import type { ChangeEvent } from 'react'
 import { useRouter } from 'next/navigation'
 
 import type { JournalCategory } from '@/lib/types'
-import { moveItem, readFilesAsDataUrls } from '@/lib/files'
+import { moveItem } from '@/lib/files'
+import { uploadImagesToBlob } from '@/lib/blob'
 import { formatDate } from '@/lib/storage'
 import { useArchiveData } from '@/lib/useArchiveData'
 
@@ -27,17 +28,23 @@ export default function JournalDetailClient({ id }: Props) {
   const [photos, setPhotos] = useState<string[]>([])
   const [dragIndex, setDragIndex] = useState<number | null>(null)
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null)
+  const [isUploading, setIsUploading] = useState(false)
   const categories: JournalCategory[] = ['데이트', '연애', '육아', '가족', '여행', '운동', '기타']
 
   const handlePhotoChange = async (event: ChangeEvent<HTMLInputElement>) => {
-    const uploaded = await readFilesAsDataUrls(event.target.files, 6, {
-      maxWidth: 1600,
-      maxHeight: 1600,
-      quality: 0.82,
-      mimeType: 'image/webp',
-    })
-    setPhotos((prev) => [...prev, ...uploaded])
-    event.target.value = ''
+    setIsUploading(true)
+    try {
+      const uploaded = await uploadImagesToBlob(event.target.files, 6, {
+        maxWidth: 1600,
+        maxHeight: 1600,
+        quality: 0.82,
+        mimeType: 'image/webp',
+      })
+      setPhotos((prev) => [...prev, ...uploaded])
+    } finally {
+      setIsUploading(false)
+      event.target.value = ''
+    }
   }
 
   const handleRemovePhoto = (index: number) => {
@@ -227,14 +234,17 @@ export default function JournalDetailClient({ id }: Props) {
           <div>
             <p className="label">사진 관리</p>
             <div className="mt-2 flex items-center gap-3 rounded-2xl border border-dashed border-sand-200 bg-sand-50 px-4 py-6">
-              <span className="text-sm text-sand-500">사진을 추가하거나 순서를 바꿔보세요.</span>
-              <label className="button-outline ml-auto cursor-pointer">
-                사진 추가
+              <span className="text-sm text-sand-500">
+                {isUploading ? '업로드 중...' : '사진을 추가하거나 순서를 바꿔보세요.'}
+              </span>
+              <label className={`button-outline ml-auto ${isUploading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}>
+                {isUploading ? '업로드 중...' : '사진 추가'}
                 <input
                   type="file"
                   accept="image/*"
                   multiple
                   className="hidden"
+                  disabled={isUploading}
                   onChange={handlePhotoChange}
                 />
               </label>
